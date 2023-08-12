@@ -74,46 +74,50 @@ function Tutorials() {
             </Box>
 
             <Grid container spacing={2}>
-                {
-                    tutorialList.map((tutorial, i) => {
-                        const statusColor = tutorial.status === 'Online' ? 'green' : 'red';
+                {tutorialList.map((tutorial, i) => {
+                    const statusColor = tutorial.status === 'Online' ? 'green' : 'red';
 
-                        return (
-                            <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
-                                <Card>
-                                    <CardContent>
-                                        <Box sx={{ display: 'flex', mb: 1 }}>
-                                            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                                                {tutorial.area}
-                                            </Typography>
-                                            <Link to={`/edittutorial/${tutorial.id}`}>
-                                                <IconButton color="primary" sx={{ padding: '4px' }}>
-                                                    <Edit />
-                                                </IconButton>
-                                            </Link>
-                                        </Box>
-                                        <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-                                            {tutorial.location}
+                    return (
+                        <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
+                            <Card>
+                                <CardContent>
+                                    <Box sx={{ display: 'flex', mb: 1 }}>
+                                        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                                            {tutorial.area}
                                         </Typography>
-                                        <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-                                            {tutorial.stationid}
+                                        <Link to={`/edittutorial/${tutorial.id}`}>
+                                            <IconButton color="primary" sx={{ padding: '4px' }}>
+                                                <Edit />
+                                            </IconButton>
+                                        </Link>
+                                    </Box>
+                                    <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+                                        Location: {tutorial.location}
+                                    </Typography>
+                                    <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+                                        Station: {tutorial.stationid}
+                                    </Typography>
+                                    <Typography sx={{ whiteSpace: 'pre-wrap', color: statusColor }}>
+                                        {tutorial.status}
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', alignItems: 'center' }} color="text.secondary">
+                                        <AccessTime sx={{ mr: 1 }} />
+                                        <Typography>
+                                            Created Date: {dayjs(tutorial.createdAt).format('DD/MM/YYYY')}
                                         </Typography>
-                                        <Typography sx={{ whiteSpace: 'pre-wrap', color: statusColor }}>
-                                            {tutorial.status}
+                                    </Box>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
+                                        color="text.secondary">
+                                        <AccessTime sx={{ mr: 1 }} />
+                                        <Typography>
+                                            Last Updated: {dayjs(tutorial.updatedAt).format(global.datetimeFormat)}
                                         </Typography>
-                                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
-                                            color="text.secondary">
-                                            <AccessTime sx={{ mr: 1 }} />
-                                            <Typography>
-                                                {dayjs(tutorial.createdAt).format(global.datetimeFormat)}
-                                            </Typography>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        );
-                    })
-                }
+                                    </Box>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    );
+                })}
             </Grid>
         </Box>
     );
