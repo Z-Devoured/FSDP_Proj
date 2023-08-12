@@ -68,41 +68,38 @@ function Tutorials() {
             </Box>
 
             <Grid container spacing={2}>
-                {
-                    tutorialList.map((tutorial, i) => {
-                        const statusColor = tutorial.status === 'Online' ? 'green' : 'red';
+            {
+    tutorialList.map((tutorial, i) => {
+        if (tutorial.status !== 'Offline') { // Check if the status is not 'Offline'
+            const statusColor = tutorial.status === 'Online' ? 'green' : 'red';
 
-                        return (
-                            <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
-                                <Card>
-                                    <CardContent>
-                                        <Box sx={{ display: 'flex', mb: 1 }}>
-                                            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                                                {tutorial.area}
-                                            </Typography>
-                                        </Box>
-                                        <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-                                            {tutorial.location}
-                                        </Typography>
-                                        <Typography sx={{ whiteSpace: 'pre-wrap' }}>
-                                            {tutorial.stationid}
-                                        </Typography>
-                                        <Typography sx={{ whiteSpace: 'pre-wrap', color: statusColor }}>
-                                            {tutorial.status}
-                                        </Typography>
-                                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
-                                            color="text.secondary">
-                                            <AccessTime sx={{ mr: 1 }} />
-                                            <Typography>
-                                                {dayjs(tutorial.createdAt).format(global.datetimeFormat)}
-                                            </Typography>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        );
-                    })
-                }
+            return (
+                <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
+                    <Card>
+                        <CardContent>
+                            <Box sx={{ display: 'flex', mb: 1 }}>
+                                <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                                    {tutorial.area}
+                                </Typography>
+                            </Box>
+                            <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+                                {tutorial.location}
+                            </Typography>
+                            <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+                                {tutorial.stationid}
+                            </Typography>
+                            <Typography sx={{ whiteSpace: 'pre-wrap', color: statusColor }}>
+                                {tutorial.status}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            );
+        } else {
+            return null; // Return null for offline stations
+        }
+    })
+}
             </Grid>
         </Box>
     );
